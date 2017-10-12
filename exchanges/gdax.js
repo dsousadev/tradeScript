@@ -43,20 +43,20 @@ module.exports.balanceCheckLoop = (currency, cb) => {
         const functions = {
           eth: () => {
             if(Number(balanceArray.data[2].available)){
-              console.log(balanceArray.data[2]);
+              //console.log(balanceArray.data[2]);
               cb();
             } else {
-              console.log("NO BALANCE RECHECKING");
-              setTimeout(() => module.exports.balanceCheckLoop(currency, cb), 0);
+              //console.log("NO BALANCE RECHECKING");
+              setImmediate(() => module.exports.balanceCheckLoop(currency, cb));
             }
           },
           btc: () => {
             if(Number(balanceArray.data[3].available)){
-              console.log(balanceArray.data[3]);
+              //console.log(balanceArray.data[3]);
               cb();
             } else {
-              console.log("NO BALANCE RECHECKING");
-              setTimeout(() => module.exports.balanceCheckLoop(currency, cb), 0);
+              //console.log("NO BALANCE RECHECKING");
+              setImmediate(() => module.exports.balanceCheckLoop(currency, cb));
             }
           }
         }
@@ -87,7 +87,7 @@ module.exports.withdraw = (currency, exchange, price) => {
 
       signedRequest.post("/withdrawals/crypto", body)
         .then(res => {
-          console.log("RES", res.data);
+          //console.log("RES", res.data);
           exchange.balanceCheckLoop(currency, () => { exchange.buy(balances[currency].exchangeCurrency, price) });
         })
         .catch(err => console.log("ERR for signing withdrawal", err.response.data));

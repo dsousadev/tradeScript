@@ -29,26 +29,26 @@ const checkArbitrage = (exchange, currency) => {
     btc: () => {
       // Price to buy ETH with all BTC is 1 ETH converted to BTC + 10 cents in BTC
       var price = (cryptoSocket.Exchanges[exchange].ETHBTC + 0.10 / cryptoSocket.Exchanges[exchange].BTCUSD).toFixed(5);
-      setTimeout(() => exchange.buy("eth", price), 0);
+      setImmediate(() => exchange.buy("eth", price));
     },
     eth: () => {
       // Price to sell all ETH for BTC is 1 ETH converted to BTC - 10 cents in BTC
       var price = (cryptoSocket.Exchanges[exchange].ETHBTC - 0.10 / cryptoSocket.Exchanges[exchange].BTCUSD).toFixed(5);
-      setTimeout(() => {() => exchange.buy("btc", price)}, 0);
+      setImmediate(() => {() => exchange.buy("btc", price)});
     }
   }
   
   if (btcSpread > 10 && btcSpread > ethSpread ) {
     flag = false;
     if (currency === "btc") {
-      setTimeout(() => exchange.withdraw(currency, exchange.withdrawExchange, (cryptoSocket.Exchanges[exchange.withdrawExchange.name].ETHBTC + 0.10 / cryptoSocket.Exchanges[exchange.withdrawExchange.name].BTCUSD).toFixed(5)), 0);
+      setImmediate(() => exchange.withdraw(currency, exchange.withdrawExchange, (cryptoSocket.Exchanges[exchange.withdrawExchange.name].ETHBTC + 0.10 / cryptoSocket.Exchanges[exchange.withdrawExchange.name].BTCUSD).toFixed(5)), 0);
     } else {
       functions[currency]();
     }
   } else if (ethSpread > 10) {
     flag = false;
     if (currency === 'eth') {
-      setTimeout(() => exchange.withdraw(currency, exchange.withdrawExchange, (cryptoSocket.Exchanges[exchange.withdrawExchange.name].ETHBTC - 0.10 / cryptoSocket.Exchanges[exchange.withdrawExchange.name].BTCUSD).toFixed(5)), 0);
+      setImmediate(() => exchange.withdraw(currency, exchange.withdrawExchange, (cryptoSocket.Exchanges[exchange.withdrawExchange.name].ETHBTC - 0.10 / cryptoSocket.Exchanges[exchange.withdrawExchange.name].BTCUSD).toFixed(5)), 0);
     } else {
       functions[currency]();
     }
@@ -56,5 +56,5 @@ const checkArbitrage = (exchange, currency) => {
 };
 
 // Kicks off the arbitration check
-setTimeout(() => { gdax.balanceCheckLoop("btc") }, 30000);
+setImmediate(() => { gdax.balanceCheckLoop("btc") }, 30000);
  

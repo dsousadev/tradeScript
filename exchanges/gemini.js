@@ -46,20 +46,20 @@ module.exports.balanceCheckLoop = (currency, cb) => {
         const functions = {
           eth: () => {
             if(Number(balanceArray.data[2].available)){
-              console.log(balanceArray.data[2]);
+              //console.log(balanceArray.data[2]);
               cb();
             } else {
-              console.log("NO BALANCE RECHECKING");
-              setTimeout(() => module.exports.balanceCheckLoop(currency, cb), 0);
+              //console.log("NO BALANCE RECHECKING");
+              setImmediate(() => module.exports.balanceCheckLoop(currency, cb));
             }
           },
           btc: () => {
             if(Number(balanceArray.data[0].available)){
-              console.log(balanceArray.data[0]);
+              //console.log(balanceArray.data[0]);
               cb();
             } else {
-              console.log("NO BALANCE RECHECKING");
-              setTimeout(() => module.exports.balanceCheckLoop(currency, cb), 0);
+              //console.log("NO BALANCE RECHECKING");
+              setImmediate(() => module.exports.balanceCheckLoop(currency, cb));
             }
           }
         }
@@ -153,7 +153,7 @@ module.exports.withdraw = (currency, exchange, price) => {
       axios
         .post("https://api.gemini.com/v1/withdraw/" + currency, "", config)
         .then(res => {
-          console.log(res);
+          //console.log(res);
           exchange.balanceCheckLoop(currency, () => { exchange.buy(exchangeCurrency, price) });
         });
     })
