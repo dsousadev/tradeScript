@@ -9,7 +9,7 @@
   "author": "Alex1100 <alex100.software@gmail.com> dsousadev <dsousa@tuta.io>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "btoa": "^1.1.2",
     "create-hmac": "^1.1.6",
     "crypto-socket": "^1.0.6",
