@@ -15,6 +15,6 @@
     "crypto-socket": "^1.0.6",
     "dotenv": "^4.0.0",
     "nonce": "^1.0.4",
-    "poloniex.js": "0.0.7"
+    "poloniex.js": "1.0.1"
   }
 }
